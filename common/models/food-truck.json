@@ -1,0 +1,101 @@
+{
+  "name": "FoodTruck",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "locationid": {
+      "type": "number",
+      "required": true
+    },
+    "Applicant": {
+      "type": "string",
+      "required": true
+    },
+    "FacilityType": {
+      "type": "string",
+      "required": true
+    },
+    "cnn": {
+      "type": "number",
+      "required": true
+    },
+    "LocationDescription": {
+      "type": "string",
+      "required": true
+    },
+    "Address": {
+      "type": "string",
+      "required": true
+    },
+    "blocklot": {
+      "type": "string",
+      "required": true
+    },
+    "block": {
+      "type": "string",
+      "required": false
+    },
+    "lot": {
+      "type": "string",
+      "required": true
+    },
+    "permit": {
+      "type": "string",
+      "required": false
+    },
+    "Status":{
+      "type":"string",
+      "required": true
+    },
+    "FoodItems": {
+      "type": "string",
+      "required": true
+    },
+    "X":{
+      "type":"number"
+    },
+    "Y":{
+      "type":"number"
+    },
+    "Latitude":{
+      "type":"number"
+    },
+    "Longitude":{
+      "type":"number"
+    },
+    "Schedule":{
+      "type":"string"
+    },
+    "dayshours":{
+      "type":"string"
+    },
+    "NOISent":{
+      "type":"string"
+    },
+    "Approved":{
+      "type":"string"
+    },
+    "Received":{
+      "type":"string"
+    },
+    "PriorPermit":{
+      "type":"number"
+    },
+    "ExpirationDate":{
+      "type":"date"
+    },
+    "Location":{
+      "type":"string"
+    },
+    "geolocation":{
+      "type" : "GeoPoint"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

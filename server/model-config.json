@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  
+  
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  
+  
+  "FoodTruck": {
+    "dataSource": "mydb",
+    "public": true,
+    "options":{
+      "remoting":{
+        "sharedMethods":{
+          "*":false,
+          "getByName":true,
+          "postData":true,
+          "deleteOneEntry":true,
+          "getByExpirationDate":true,
+          "bestTruck":true,
+          "findByLocation":true
+        }
+      }
+    }
+  }
+}

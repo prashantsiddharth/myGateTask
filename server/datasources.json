@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+
+   "mydb": {
+        "host": "localhost",
+        "port": 27017,
+        "url": "mongodb://localhost:27017/commondb",
+        "database": "commondb",
+        "name": "mydb",
+        "connector": "mongodb",
+        "connectionTimeout": 50000
+    }
+}
