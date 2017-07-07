@@ -22,7 +22,20 @@ Installations Needed :
 
 Make sure that you have C:\data\db (data folder inside C directory and inside that db folder : MongoDb's default folder to store data). 
 
-Running the tests :
-1) Search by name of applicant : 
+
+Running Servers :
+go to the project directory
+a) Run MongoDb Server  (C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe)
+b) Run Command 'node .' on console
+
+
+Running the tests : (Host and port are assigned as localhost and 3000 in server file)
+1) Search by name of applicant : http://localhost:3000/api/FoodTrucks/getByName?name=SOMENAMETOSEARCH  (It will give data of all applicants having name as SOMENAMETOSEARCH)
+2) Search by expiration date : http://localhost:3000/api/FoodTrucks/getByExpirationDate  (It will give all the data with expiration date less than current date)
+3) Search by Street Name : http://localhost:3000/api/FoodTrucks/findByLocation?lat=SOMELATITUDE&lng=SOMELONGITUDE (two inputs, latitude and longitude. It will give the detail of data having latitude as SOMELATITUDE and longitude as SOMELONGITUDE)
+4) a) Add new entry to the data set : http://localhost:3000/api/FoodTrucks/postData 
+   b) Delete an entry : http://localhost:3000/api/FoodTrucks/deleteOneEntry
+6) Auto Expiry of licenses : Automatically Status of expired licenses would change to 'Expired' at 00:00:01 AM in morning. Scheduler has been implemented with node-schedule module of node.js. Which will automatically execute a scheduled job at 1st second of everyday and will change the status.
+7) Predicting best truck : http://localhost:3000/api/FoodTrucks/bestTruck?lat=SOMELATITUDE&lng=SOMELONGITUDE  To predict best truck at a location, two input latitude and longitude are provided. It will give the nearest truck from SOMELATITUDE and SOMELONGITUDE.
 
 
