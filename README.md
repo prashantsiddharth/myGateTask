@@ -29,13 +29,22 @@ a) Run MongoDb Server  (C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe)
 b) Run Command 'node .' on console
 
 
-Running the tests : (Host and port are assigned as localhost and 3000 in server file)
+Running the tests : (Host and port are assigned as localhost and 3000 in server file)(running through postman would be best as explained down. Please post some data through postman as explained in 4(a) before testing other apis)
 1) Search by name of applicant : http://localhost:3000/api/FoodTrucks/getByName?name=SOMENAMETOSEARCH  (It will give data of all applicants having name as SOMENAMETOSEARCH)
 2) Search by expiration date : http://localhost:3000/api/FoodTrucks/getByExpirationDate  (It will give all the data with expiration date less than current date)
 3) Search by Street Name : http://localhost:3000/api/FoodTrucks/findByLocation?lat=SOMELATITUDE&lng=SOMELONGITUDE (two inputs, latitude and longitude. It will give the detail of data having latitude as SOMELATITUDE and longitude as SOMELONGITUDE)
 4) a) Add new entry to the data set : http://localhost:3000/api/FoodTrucks/postData 
    b) Delete an entry : http://localhost:3000/api/FoodTrucks/deleteOneEntry
-6) Auto Expiry of licenses : Automatically Status of expired licenses would change to 'Expired' at 00:00:01 AM in morning. Scheduler has been implemented with node-schedule module of node.js. Which will automatically execute a scheduled job at 1st second of everyday and will change the status.
-7) Predicting best truck : http://localhost:3000/api/FoodTrucks/bestTruck?lat=SOMELATITUDE&lng=SOMELONGITUDE  To predict best truck at a location, two input latitude and longitude are provided. It will give the nearest truck from SOMELATITUDE and SOMELONGITUDE.
+5) Auto Expiry of licenses : Automatically Status of expired licenses would change to 'Expired' at 00:00:01 AM in morning. Scheduler has been implemented with node-schedule module of node.js. Which will automatically execute a scheduled job at 1st second of everyday and will change the status.
+6) Predicting best truck : http://localhost:3000/api/FoodTrucks/bestTruck?lat=SOMELATITUDE&lng=SOMELONGITUDE  To predict best truck at a location, two input latitude and longitude are provided. It will give the nearest truck from SOMELATITUDE and SOMELONGITUDE.
 
+RUNNING THE TEST USING POSTMAN : 
+1) Search by name of applicant : Choose verb get, link = http://localhost:3000/api/FoodTrucks/getByName and provide one input with key 'name' and also provide some value to this key.
+2) Search by expiration date : Choose verb get, link = http://localhost:3000/api/FoodTrucks/getByExpirationDate and run. All licenses which are having expiration date less than current date will be the response.
+3) Search by Street name : Choose verb get, link = http://localhost:3000/api/FoodTrucks/findByLocation and provide two inputs with key 'lat' and 'lng' and with valid values of latitude and longitude.
+4) a) Add new Entry : Choose verb post, link = http://localhost:3000/api/FoodTrucks/postData and provide one input with key 'data' and value for that key should be a json object or multiple json objects in the form of array. All data I've already converted into json form which are in file common/models/data.txt, for testing purpose data can be copied from there.
+   b) Delete an Entry : Choose verb Delete, link = http://localhost:3000/api/FoodTrucks/deleteOneEntry, All posted entries contains a unique id so to delete an entry particular id can be provided as an input. Provide a key 'id' with some valid value.
+5) Auto Expiry of licenses : As explained above
+6) Predicting best truck : Choose verb get, link = http://localhost:3000/api/FoodTrucks/bestTruck and provide two inputs with key 'lat' and 'lng' with valid values. Response would be the best truck(closest to the location provided as input)
 
+There is also an api explorer that can be seen on http://localhost:3000/explorer (from here as well we can test all apis)
