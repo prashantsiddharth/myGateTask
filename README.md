@@ -18,8 +18,11 @@ Installations Needed :
 1) MongoDb : https://www.mongodb.com/download-center#community 
 2) Node.js : https://nodejs.org/en/download/
 3) Loopback : with command 'npm install -g loopback-cli' (install node first and the loopback)
+4) npm  :  run command 'npm install' (used for the purpose of installing npm packages, it will make a npm-package folder and install all packages there)
 
 Make sure that you have C:\data\db (data folder inside C directory and inside that db folder : MongoDb's default folder to store data). 
 
-Running Server :
+Running the tests :
+1) Search by name of applicant : 
+
 
