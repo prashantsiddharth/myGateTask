@@ -37,6 +37,9 @@ module.exports = function(Foodtruck) {
 			}
 		}
 		if(flag && newFoodTruck.ExpirationDate.length==0) newFoodTruck.ExpirationDate = null;
+    if(flag){
+			newFoodTruck.geolocation = new loopback.GeoPoint({lat:newFoodTruck.Latitude, lng:newFoodTruck.Longitude});
+		}
 		Foodtruck.create(newFoodTruck,function(err,response){
 			if(err){
 				cb(err);
