@@ -1,4 +1,7 @@
 'use strict';
+var GeoPoint = require('geopoint');
+var loopback = require('loopback');
+
 
 module.exports = function(Foodtruck) {
 
@@ -26,7 +29,6 @@ module.exports = function(Foodtruck) {
 
 	//For  api postData
 	Foodtruck.postData = function(data,cb){
-		var loopback = require('loopback');
 		var newFoodTruck = JSON.parse(data);
 		var flag = true;
 		for(var i=0; i<newFoodTruck.length; ++i){
@@ -95,9 +97,8 @@ module.exports = function(Foodtruck) {
 
 	//api for finding best truck at given location
 	Foodtruck.bestTruck = function(lat,lng,cb){
-		var loopback = require('loopback');
 		var here = new loopback.GeoPoint({lat:lat, lng: lng});
-		var filter = {where: {geolocation: {near: here},FacilityType:'Truck'}, limit:1};
+		var filter = {where: {geolocation: {near: here,maxDistance:1000,unit:'kilometers'},FacilityType:'Truck'}, limit:1};
 		Foodtruck.find(filter,function(err,response){
 			if(err){
 				cb(err);
@@ -114,7 +115,6 @@ module.exports = function(Foodtruck) {
 
 	//api to findByLocation
 	Foodtruck.findByLocation = function(lat,lng,cb){
-		var loopback = require('loopback');
 		var here = new loopback.GeoPoint({lat:lat, lng: lng});
 		var filter = {where: {geolocation: here}};
 		Foodtruck.find(filter,function(err,response){
@@ -128,6 +128,56 @@ module.exports = function(Foodtruck) {
 		accepts : [{arg:'lat',type:'number'},{arg:'lng',type:'number'}],
 		returns : {arg: 'response',type:'string'},
 		http : {path: '/findByLocation', verb:'get'}
+	});
+
+
+	Foodtruck.findByLocationName = function(keyword,cb){
+		var filter = {where: {Address: {like:keyword}}};
+		Foodtruck.find(filter,function(err,response){
+			if(err){
+				cb(err);
+			}
+			cb(null,response);
+		});
+	}
+	Foodtruck.remoteMethod('findByLocationName',{
+		accepts : [{arg:'keyword',type:'string'}],
+		returns : {arg: 'response',type:'string'},
+		http : {path: '/findByLocationName', verb:'get'}
+	});
+
+
+	Foodtruck.bestTruckMultipleLocation = function(args,cb){
+		Foodtruck.find(null,function(err,response){
+			if(err){
+				cb(err);
+			}
+			else{
+				
+				var response1 = response;
+				var args1 = JSON.parse(args);
+				var fin_ans = 2000;
+				var index = response1.length;
+				var flag = false;
+				for(var i=0;i<response1.length;i++){
+					var sum = 0;
+					var loc1 = new GeoPoint(response1[i].Latitude,response1[i].Longitude);
+					for(var j=0;j<args1.length;j++){
+						var loc2 = new GeoPoint(args1[j].lat, args1[j].lng);
+						sum = sum + loc1.distanceTo(loc2,true);
+					}
+					if(fin_ans > sum) {flag = true; fin_ans = sum; index = i;}
+				}
+				if(flag)
+				    cb(null,response1[index]);
+				else cb(null,null);
+			}
+		});
+	}
+	Foodtruck.remoteMethod('bestTruckMultipleLocation',{
+		accepts : [{arg:'args',type:'string'}],
+		returns : {arg: 'response',type:'string'},
+		http : {path: '/bestTruckMultipleLocation', verb:'get'}
 	});
 
 

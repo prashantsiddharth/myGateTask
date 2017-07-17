@@ -33,7 +33,9 @@
           "deleteOneEntry":true,
           "getByExpirationDate":true,
           "bestTruck":true,
-          "findByLocation":true
+          "findByLocationName":true,
+          "findByLocation":true,
+          "bestTruckMultipleLocation":true
         }
       }
     }
